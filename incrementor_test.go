@@ -1,8 +1,9 @@
 package incrementor
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestIncrementor(t *testing.T) {
@@ -43,17 +44,18 @@ func TestIncrementor(t *testing.T) {
 		},
 	}
 
-	for _, test := range tests {
-		test.incrementor.SetMaximumValue(test.maxValue)
-		if test.incrementCount > 0 {
+	for _, tt := range tests {
+		tt := tt
+		tt.incrementor.SetMaximumValue(tt.maxValue)
+		if tt.incrementCount > 0 {
 			var i uint
-			for i = 0; i < test.incrementCount; i++ {
-				test.incrementor.IncrementNumber()
+			for i = 0; i < tt.incrementCount; i++ {
+				tt.incrementor.IncrementNumber()
 			}
 		}
-		t.Run(test.name, func(t *testing.T) {
-			actual := test.incrementor.GetNumber()
-			assert.Equal(t, test.expectedValue, actual)
+		t.Run(tt.name, func(t *testing.T) {
+			actual := tt.incrementor.GetNumber()
+			assert.Equal(t, tt.expectedValue, actual)
 		})
 	}
 }
